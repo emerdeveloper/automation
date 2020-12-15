@@ -5,19 +5,13 @@ Feature: Autentication in EDIN Channel
   @AutenticationSuccessful
   Scenario Outline: Validate users data is correct
     Given Emer open SVI web site
-    When Emer type number <documentType> and type document <documentNumber>
-    Then Display the product list in home
+    When he enter document type <documentType> and enter document <documentNumber> and later enter the <password>
+      |   documentType  |   documentNumber  |   password   |
+      |   CC            |   32323232332     |   a1234567   |
+    Then he can see the date and time in home
+      |   expectedValue       |
+      |   Fecha y hora actual |
 
     Examples:
-      | documentType  | documentNumber |
-      | cc            | 32323232332    |
-
-  @AutenticationFailed
-  Scenario Outline: Validate users data is incorrect
-    Given Emer open APP
-    When Emer type number <documentType> and type document <documentNumber>
-    Then Display a message error
-
-    Examples:
-      | documentType  | documentNumber |
-      | cc            | 32323232332    |
+      | documentType  | documentNumber  | password  |
+      | cc            | 32323232332     | a1234567  |
