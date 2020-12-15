@@ -1,0 +1,55 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.8")
+    }
+}
+
+dependencies {
+    testCompile 'net.serenity-bdd:serenity-core:2.0.17'
+    testCompile 'net.serenity-bdd:serenity-junit:2.0.8'
+    testCompile 'net.serenity-bdd:serenity-cucumber:1.9.20'
+    testCompile 'net.serenity-bdd:serenity-screenplay:2.0.8'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:1.7.0'
+    testCompile 'org.slf4j:slf4j-simple:1.7.7'
+    testCompile group: 'org.testng', name: 'testng', version: '6.13.1'
+
+    compile 'net.serenity-bdd:serenity-core:2.0.17'
+    compile 'net.serenity-bdd:serenity-junit:2.0.8'
+    compile 'net.serenity-bdd:serenity-cucumber:1.9.20'
+    compile 'net.serenity-bdd:serenity-screenplay:2.0.8'
+
+    compile group: 'net.serenity-bdd', name: 'serenity-screenplay-webdriver', version: '2.0.8'
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+
+    implementation group: 'io.appium', name: 'java-client', version: '6.1.0'
+}
+
+test {
+    systemProperty "file.encoding", "utf-8"
+}
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+
+tasks.withType(Test) {
+    systemProperties = System.properties
+}
+
+gradle.startParameter.continueOnFailure = true
